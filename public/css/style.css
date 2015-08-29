@@ -1,0 +1,37 @@
+h1 {
+	font-size: 5em;
+	color: black;
+}
+
+.burger-opt-btn {
+	font-size: 25px;
+	font-weight: bolder;
+}
+
+.buns-btn {
+	background-color: #e1c699;
+}
+
+.meats-btn {
+	background-color: #8b7355;
+}
+
+.cheeses-btn {
+	background-color: #ffd700;
+}
+
+.veggies-btn {
+	background-color: #00ff7f;
+}
+
+.condos-btn {
+	background: linear-gradient(180deg, red, yellow);
+}
+
+.others-btn {
+	background: linear-gradient(180deg, #dc143c, #ffc0cb, #dc143c);
+}
+
+.hide {
+	display: none;
+}

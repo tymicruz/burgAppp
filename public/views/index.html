@@ -1,0 +1,151 @@
+<!-- public/views/index.html -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>burg app</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css"> <!-- custom styles -->
+
+	<!-- JS -->
+	<script src="libs/jquery/dist/jquery.min.js"></script>
+	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="libs/angular/angular.min.js"></script>
+	<script src="libs/angular-route/angular-route.min.js"></script>
+
+
+	<!-- ANGULAR CUSTOM -->
+	<script src="js/controllers/BurgerCtrl.js"></script>
+	<script src="js/services/BurgerService.js"></script>
+	<script src="js/appRoutes.js"></script>
+	<script src="js/app.js"></script>
+
+
+</head>
+
+<body ng-app="burgApp" ng-controller="BurgerController">
+
+	<div class="container-fluid">
+
+		<h1>BurgApp</h1>
+		<h3 ng-class="{hide : !postMode}">{{word}}</h3>
+		<h3 ng-class="{hide : postMode}">created on {{burgerCreateDate | date:'MM/dd/yyyy @ h:mm:ssa'}} && last edited on {{burgerEditDate | date:'MM/dd/yyyy @ h:mm:ssa'}}</h3>
+		<!-- <h3 ng-class="{hide : postMode}"></h3> -->
+		<div class="row"> 
+
+			<div class="col-sm-2">
+				<button class="btn col-md-12 btn-info burger-opt-btn buns-btn dropdown-toggle" ng-class="{disabled : !postMode}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">buns</span></button>
+
+				<ul class="dropdown-menu">
+					<li ng-repeat="bun in buns" ng-mouseover="setDescription(bun.description)" ng-mouseleave="clear()" ng-click="setBun(bun);"><a  href="#">{{bun._id}}</a></li>
+				</ul>
+			</div>
+
+
+			<div class="col-sm-2">
+				<button class="col-sm-12 btn btn-info burger-opt-btn meats-btn dropdown-toggle" ng-class="{disabled : !postMode}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">meats</button>
+
+				<ul class="dropdown-menu">
+					<li ng-repeat="meat in meats" ng-mouseover="setDescription(meat.description)" ng-mouseleave="clear()" ng-click="addMeat(meat);"><a href="#">{{meat._id}}</a></li>
+				</ul>
+			</div>
+
+
+			<div class="col-sm-2">
+				<button class="col-sm-12 btn btn-info burger-opt-btn cheeses-btn dropdown-toggle" ng-class="{disabled : !postMode}" data-toggle="dropdown">cheeses</button>
+
+				<ul class="dropdown-menu">
+					<li ng-repeat="cheese in cheeses" ng-mouseover="setDescription(cheese.description)" ng-mouseleave="clear()" ng-click="addCheese(cheese);"><a href="#">{{cheese._id}}</a></li>
+				</ul>
+			</div>
+
+
+			<div class="col-sm-2">
+				<button class="col-sm-12 btn btn-info burger-opt-btn veggies-btn dropdown-toggle" ng-class="{disabled : !postMode}" data-toggle="dropdown">veggies</button>
+
+				<ul class="dropdown-menu">
+					<li ng-repeat="veggie in veggies" ng-mouseover="setDescription(veggie.description)" ng-mouseleave="clear()" ng-click="addVeggie(veggie);"><a href="#">{{veggie._id}}</a></li>
+				</ul>
+			</div>
+
+
+			<div class="col-sm-2">
+				<button class="col-sm-12 btn btn-info burger-opt-btn condos-btn dropdown-toggle" ng-class="{disabled : !postMode}" data-toggle="dropdown">condos</button>
+
+				<ul class="dropdown-menu">
+					<li ng-repeat="condo in condos" ng-mouseover="setDescription(condo.description)" ng-mouseleave="clear()" ng-click="addCondo(condo);"><a href="#">{{condo._id}}</a></li>
+				</ul>
+			</div>
+
+
+			<div class="col-sm-2">
+				<button class="col-sm-12 btn btn-info burger-opt-btn others-btn dropdown-toggle" ng-class="{disabled : !postMode}" data-toggle="dropdown">others</button>
+
+				<ul class="dropdown-menu">
+					<li ng-repeat="other in others" ng-mouseover="setDescription(other.description)" ng-mouseleave="clear()" ng-click="addOther(other);"><a href="#">{{other._id}}</a></li>
+				</ul>
+			</div>
+
+		</div><!-- END OF DROP DOWN MENUS-->
+
+		<div>
+			<h2 style="margin-top: 160px;">ur burger({{burger._id}}) 
+				<button ng-click="postBurger();" ng-class="{hide : !postMode}">{{postEditButton}}</button>
+				<button ng-click="restart();" ng-class="">new burger</button>
+				<button ng-click="editBurgerMode();" ng-class="{hide : postMode}">edit burger</button>
+			</h2>
+		</div>
+
+
+		<div class="container">
+			<div class="row">
+				<div class ="col-md-6">
+					<h4>{{burger.bun._id}}</h3>
+
+						<h4 ng-repeat="thing in burger.array track by $index | orderBy:'$index':'+'" ng-init="check = false; index = $indexsu
+						" ng-click="check = (true && postMode); remove($index)" ng-class="{hide : check && postMode};">{{thing._id}}</h4>
+
+						<h4>{{burger.bun._id}}</h3>
+
+
+							<form ng-submit="getBurger(burgerId);">
+								<label>burgID:</label>
+								<input type="text" ng-model="burgerId" required></input>
+								<input type="submit" value="Find"/>
+							</form>
+				</div>
+
+				<div class="col-md-6">
+					<h2>
+						burgFeed:
+					</h2>
+
+					<ul>
+						<li ng-repeat="burg in burgFeed">{{burg._id}} : {{burg.editDate | date : "MM/dd/yy @ h:mm:ssa"}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+						<!-- HEADER -->
+<!-- 	<nav class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">mean-starter: Node and Angular</a>
+		</div>
+
+		<!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+		<!--<ul class="nav navbar-nav">
+			<li><a href="/nerds">Nerds</a></li>
+		</ul>
+	</nav> -->
+
+	<!-- ANGULAR DYNAMIC CONTENT -->
+	<!-- <div ng-view></div> -->
+
+</div>
+</body>
+</html>

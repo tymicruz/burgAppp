@@ -1,0 +1,5 @@
+{
+	"proxy":"http://wall.ad.selinc.com:8080",
+    "https-proxy":"http://wall.ad.selinc.com:8080",
+	"directory" : "public/libs"
+}
