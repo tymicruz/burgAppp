@@ -122,11 +122,11 @@
 
 				<div class="col-md-6">
 					<h2>
-						burgFeed:
+						burgFeed: <button ng-click="refreshBurgers()">refresh</button>
 					</h2>
 
 					<ul>
-						<li ng-repeat="burg in burgFeed">{{burg._id}} : {{burg.editDate | date : "MM/dd/yy @ h:mm:ssa"}}</li>
+						<li ng-repeat="burg in burgFeed"><a href=""><span ng-mouseenter="on = true;" ng-mouseleave="on = false;" ng-class="{turnOn : on}" ng-click="getBurger(burg._id)">{{burg._id}}</span></a> : {{burg.editDate | date : "MM/dd/yy @ h:mm:ssa"}}</li>
 					</ul>
 				</div>
 			</div>

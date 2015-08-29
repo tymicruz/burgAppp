@@ -35,3 +35,7 @@ h1 {
 .hide {
 	display: none;
 }
+
+.turnOn {
+	color: #7fff00;
+}

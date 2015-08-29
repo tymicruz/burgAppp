@@ -9,8 +9,6 @@ module.exports = function(app, db, io) {
 
 	});
 
-
-
 	app.get('/api/buns', function(req, res){
 		var buns = db.collection('buns');
 

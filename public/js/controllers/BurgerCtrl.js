@@ -52,6 +52,8 @@ angular.module('BurgerCtrl', []).controller('BurgerController', function($scope,
 		$scope.word = "- the future of burger making";
 	}
 
+	$scope.refreshBurgers = function()
+{
 	Burger.getRecentBurgers("10").then(
 
 		function(response){
@@ -65,6 +67,9 @@ angular.module('BurgerCtrl', []).controller('BurgerController', function($scope,
 
 
 	});
+}
+
+$scope.refreshBurgers();
 
 	Burger.getBuns().then(
 
@@ -201,9 +206,10 @@ angular.module('BurgerCtrl', []).controller('BurgerController', function($scope,
 					console.log("GOOD POST");
 					console.log("new burgid: " + response.data);
 					console.log(response.status);
+					$scope.restart();
 
 					$scope.word = "new burgid: " + response.data;
-					$scope.restart();
+					//$scope.restart();
 				},
 
 				function(response){
@@ -221,8 +227,9 @@ angular.module('BurgerCtrl', []).controller('BurgerController', function($scope,
 			Burger.updateBurger($scope.burger).then(
 				function(response){
 					console.log("successful update");
-					$scope.word = "update burgid: " + JSON.stringify(response.data);
 					$scope.restart();
+					//$scope.word = "update burgid: " + JSON.stringify(response.data);
+					
 				}, function(response){
 					console.log("fck failed update...");
 				})
