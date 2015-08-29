@@ -42,8 +42,8 @@ angular.module('BurgerService', []).factory('Burger', ['$http', function($http){
 		},
 
 		// call to DELETE a nerd
-		delete : function(id) {
-			return $http.delete('/api/nerds' + id);
+		deleteBurger : function(id) {
+			return $http.delete('/api/burgers/' + id);
 		},
 
 		getRecentBurgers : function(num)

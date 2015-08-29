@@ -104,7 +104,7 @@
 
 		<div class="container">
 			<div class="row">
-				<div class ="col-md-6">
+				<div class ="col-sm-6">
 					<h4>{{burger.bun._id}}</h3>
 
 						<h4 ng-repeat="thing in burger.array track by $index | orderBy:'$index':'+'" ng-init="check = false; index = $indexsu
@@ -120,13 +120,13 @@
 							</form>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-sm-6">
 					<h2>
 						burgFeed: <button ng-click="refreshBurgers()">refresh</button>
 					</h2>
 
 					<ul>
-						<li ng-repeat="burg in burgFeed"><a href=""><span ng-mouseenter="on = true;" ng-mouseleave="on = false;" ng-class="{turnOn : on}" ng-click="getBurger(burg._id)">{{burg._id}}</span></a> : {{burg.editDate | date : "MM/dd/yy @ h:mm:ssa"}}</li>
+						<li ng-repeat="burg in burgFeed"><a href=""><span ng-mouseenter="on = true;" ng-mouseleave="on = false;" ng-class="{turnOn : on}" ng-click="getBurger(burg._id)">{{burg._id}}</span></a> : {{burg.editDate | date : "MM/dd/yy @ h:mm:ssa"}}<button ng-click="deleteBurger(burg._id);">delete</button></li>
 					</ul>
 				</div>
 			</div>

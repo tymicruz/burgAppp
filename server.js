@@ -3,7 +3,8 @@ MongoClient = require('mongodb').MongoClient,
 app = express(),
 bodyParser = require('body-parser'),
 methodOverride = require('method-override'),
-io = "socket";//require('socket.io');
+//server = require('http').createServer(app),
+io = "io";//require('socket.io').listen(server);
 
 
 

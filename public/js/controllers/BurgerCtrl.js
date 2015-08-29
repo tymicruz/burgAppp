@@ -295,4 +295,21 @@ $scope.refreshBurgers();
 
 	}
 
+	$scope.deleteBurger = function(burgerID)
+	{
+		Burger.deleteBurger(burgerID).then(
+			
+			function(response){
+				console.log("delete successful");
+				console.log(JSON.stringify(response.data));
+				$scope.refreshBurgers();
+
+			},
+
+			 function(response){
+			 	console.log("delete FAIIIILL");
+
+			 });
+	}
+
 });

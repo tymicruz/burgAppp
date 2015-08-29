@@ -156,7 +156,7 @@ module.exports = function(app, db, io) {
 
 		var obID = new ObjectID(burgerID);
 
-		var operator = { $set : {array : burger.array, editDate : burger.editDate}};
+		var operator = { $set : {array : burger.array, editDate : burger.editDate, bun : burger.bun}};
 
 		burgers.update({_id: obID}, operator, function(err, doc){
 
@@ -167,6 +167,21 @@ module.exports = function(app, db, io) {
 			}
 
 			console.log("found: " + JSON.stringify(doc));
+			res.send(doc);
+		});
+	});
+
+	app.delete('/api/burgers/:burgerID', function(req,res){
+		var burgers = db.collection('burgers');
+
+		var obID = new ObjectID(req.params.burgerID);
+
+		burgers.remove({_id : obID}, function(err, doc){
+			if(err){
+				throw err;
+			}
+			console.log("removed:");
+			console.log(JSON.stringify(doc));
 			res.send(doc);
 		});
 	});
