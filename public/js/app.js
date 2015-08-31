@@ -1,1 +1,1 @@
-angular.module('burgApp', ['ngRoute', 'appRoutes', 'BurgerCtrl', 'BurgerService']);
+angular.module('burgApp', ['ngRoute', 'appRoutes', 'BurgerCtrl', 'BurgerService', 'SocketService']);

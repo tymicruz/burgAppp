@@ -39,3 +39,7 @@ h1 {
 .turnOn {
 	color: #7fff00;
 }
+
+.grayOut {
+	color: #DCDCDC;
+}

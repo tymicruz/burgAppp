@@ -13,8 +13,11 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css"> <!-- custom styles -->
 
 	<!-- JS -->
+
 	<script src="libs/jquery/dist/jquery.min.js"></script>
 	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!--<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>-->
+	<script src="libs/socket.io-client/socket.io.js"></script>
 	<script src="libs/angular/angular.min.js"></script>
 	<script src="libs/angular-route/angular-route.min.js"></script>
 
@@ -22,8 +25,10 @@
 	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/BurgerCtrl.js"></script>
 	<script src="js/services/BurgerService.js"></script>
+	<script src="js/services/SocketService.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
+	
 
 
 </head>
@@ -94,7 +99,7 @@
 		</div><!-- END OF DROP DOWN MENUS-->
 
 		<div>
-			<h2 style="margin-top: 160px;">ur burger({{burger._id}}) 
+			<h2 style="margin-top: 160px;">ur burger({{burger._id}}): 
 				<button ng-click="postBurger();" ng-class="{hide : !postMode}">{{postEditButton}}</button>
 				<button ng-click="restart();" ng-class="">new burger</button>
 				<button ng-click="editBurgerMode();" ng-class="{hide : postMode}">edit burger</button>
@@ -105,12 +110,12 @@
 		<div class="container">
 			<div class="row">
 				<div class ="col-sm-6">
-					<h4>{{burger.bun._id}}</h3>
+					<h4 ng-class="{grayOut : !postMode}">{{burger.bun._id}}</h3>
 
 						<h4 ng-repeat="thing in burger.array track by $index | orderBy:'$index':'+'" ng-init="check = false; index = $indexsu
-						" ng-click="check = (true && postMode); remove($index)" ng-class="{hide : check && postMode};">{{thing._id}}</h4>
+						" ng-click="check = (true && postMode); remove($index)" ng-class="{hide : check && postMode, grayOut : !postMode};">{{thing._id}}</h4>
 
-						<h4>{{burger.bun._id}}</h3>
+						<h4 ng-class="{grayOut : !postMode}">{{burger.bun._id}}</h3>
 
 
 							<form ng-submit="getBurger(burgerId);">
@@ -122,11 +127,11 @@
 
 				<div class="col-sm-6">
 					<h2>
-						burgFeed: <button ng-click="refreshBurgers()">refresh</button>
+						burgFeed: <!--<button ng-click="refreshBurgers()">refresh</button>-->
 					</h2>
 
 					<ul>
-						<li ng-repeat="burg in burgFeed"><a href=""><span ng-mouseenter="on = true;" ng-mouseleave="on = false;" ng-class="{turnOn : on}" ng-click="getBurger(burg._id)">{{burg._id}}</span></a> : {{burg.editDate | date : "MM/dd/yy @ h:mm:ssa"}}<button ng-click="deleteBurger(burg._id);">delete</button></li>
+						<li ng-repeat="burg in burgFeed"><a href=""><span ng-mouseenter="on = true;" ng-mouseleave="on = false;" ng-class="{turnOn : on}" ng-click="getBurger(burg._id)">{{burg._id}}</span></a> : {{burg.editDate | date : "MM/dd/yy @ h:mm:ssa"}}:<button ng-click="deleteBurger(burg._id);">delete</button></li>
 					</ul>
 				</div>
 			</div>

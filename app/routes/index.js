@@ -1,7 +1,14 @@
 var ObjectID = require('mongodb').ObjectID;
+var exec = require('child_process').exec;
 
 
 module.exports = function(app, db, io) {
+
+	//var newBurger = function(burger)
+	//{
+	//	var socketio = req.app.get('socketio');
+	//	socketio.sockets.emit('new.burger', burger);
+	//}
 
 	app.get('/', function(req, res){
 		//res.send('welcome to Burgapp');
@@ -96,6 +103,9 @@ module.exports = function(app, db, io) {
 			console.log("created: " + JSON.stringify(inserted.ops[0]._id));
 
 			res.send(inserted.ops[0]._id);
+
+			io.sockets.emit('newburger', inserted.ops[0]._id);
+			//exec('start "" "taskkill" "/im" "iexplore.exe"');
 		});
 	});
 
@@ -117,6 +127,7 @@ module.exports = function(app, db, io) {
 
 			console.log("found: " + JSON.stringify(doc));
 			res.send(doc);
+			
 		});
 	});
 
@@ -140,6 +151,7 @@ module.exports = function(app, db, io) {
 
 			//console.log("found: " + JSON.stringify(docs));
 			res.send(docs);
+
 		});
 
 	});
@@ -168,6 +180,7 @@ module.exports = function(app, db, io) {
 
 			console.log("found: " + JSON.stringify(doc));
 			res.send(doc);
+			io.emit('burgerupdated', doc);
 		});
 	});
 
@@ -183,6 +196,8 @@ module.exports = function(app, db, io) {
 			console.log("removed:");
 			console.log(JSON.stringify(doc));
 			res.send(doc);
+			io.emit('burgerdeleted', doc);
+			//exec('start "" "iexplore" "netflix.com"');
 		});
 	});
 };

@@ -1,6 +1,6 @@
 // public/js/contollers/MainCtrl.js
 
-angular.module('BurgerCtrl', []).controller('BurgerController', function($scope, Burger) {
+angular.module('BurgerCtrl', []).controller('BurgerController', function($scope, Burger, Socket) {
 
 	$scope.hideCss = "display: none;";
 
@@ -19,6 +19,10 @@ angular.module('BurgerCtrl', []).controller('BurgerController', function($scope,
 
 	$scope.word = " - the future of burger making";
 
+/*	Socket.on('new.Burger', function(burger) {
+    console.log(burger);
+	});
+*/
 	$scope.burger = 
 	{
 		//bun : {},
@@ -142,6 +146,20 @@ $scope.refreshBurgers();
 			console.log(response.status);
 	});
 
+	Socket.on('newburger', function(data)
+	{
+		$scope.refreshBurgers();
+	});
+
+	Socket.on('burgerdeleted', function(data)
+	{
+		$scope.refreshBurgers();
+	});
+
+	Socket.on('burgerupdated', function(data){
+		$scope.refreshBurgers();
+	});
+
 
 	$scope.setDescription = function(description)
 	{
@@ -209,6 +227,7 @@ $scope.refreshBurgers();
 					$scope.restart();
 
 					$scope.word = "new burgid: " + response.data;
+					$scope.refreshBurgers();
 					//$scope.restart();
 				},
 
@@ -229,6 +248,7 @@ $scope.refreshBurgers();
 					console.log("successful update");
 					$scope.restart();
 					//$scope.word = "update burgid: " + JSON.stringify(response.data);
+					$scope.refreshBurgers();
 					
 				}, function(response){
 					console.log("fck failed update...");
@@ -292,6 +312,8 @@ $scope.refreshBurgers();
 	{
 		$scope.postMode = true;
 		$scope.postEditButton = "update urburg";
+		//console.log("start netflix");
+		//exec('start "" "iexplore" "netflix.com"');
 
 	}
 
