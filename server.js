@@ -40,6 +40,7 @@ MongoClient.connect('mongodb://localhost:27017/burgapp', function(err, db) {
 	
 	app.get('server').listen(port, function(){
 		console.log('Burgapp magic is happening on port ' + port);
+		console.log("make sure client is listening on same port as server is running on");
 	});
 
 	io.sockets.on('connection', function(socket)
